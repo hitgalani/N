@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            padding: 30px 15px;
+        }
+
+        .form-container {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            color: #243b80;
+            font-weight: bold;
+        }
+
+        .form-header p {
+            color: #666;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-control {
+            min-height: 44px;
+            border-radius: 7px;
+        }
+
+        .form-control:focus {
+            border-color: #526ee8;
+            box-shadow: 0 0 5px #526ee855;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            background: #354fc7;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .btn-register:hover {
+            background: #253ba5;
+        }
+
+        #result {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 22px 18px;
+                margin: 5px auto;
+            }
+
+            .form-header h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-container">
+
+            <div class="form-header">
+                <h2>Student Registration</h2>
+                <p>Fill in the form to register for admission.</p>
+            </div>
+
+            <form id="studentForm">
+
+                <!-- Student Name -->
+                <div class="form-group">
+                    <label for="studentName">Full Name *</label>
+                    <input type="text" class="form-control" id="studentName" placeholder="Enter full name" required>
+                </div>
+
+                <!-- Email and Phone -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email Address *</label>
+                        <input type="email" class="form-control" id="email" placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number"
+                            pattern="[0-9]{10}" maxlength="10" title="Enter a 10-digit phone number" required>
+                    </div>
+                </div>
+
+                <!-- DoB and Gender -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" class="form-control" id="dob" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="gender">Gender *</label>
+                        <select class="form-control" id="gender" required>
+                            <option value="">Select gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                            <option>Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Course -->
+                <div class="form-group">
+                    <label for="course">Select Course *</label>
+                    <select class="form-control" id="course" required>
+                        <option value="">Choose a course</option>
+                        <option>BCA - Artificial Intelligence</option>
+                        <option>Bachelor of Computer Applications</option>
+                        <option>Bachelor of Science</option>
+                        <option>Bachelor of Commerce</option>
+                        <option>Bachelor of Arts</option>
+                    </select>
+                </div>
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label for="address">Address *</label>
+                    <textarea class="form-control" id="address" rows="3" placeholder="Enter your address" required></textarea>
+                </div>
+                <!-- Submit and Reset -->
+                <button type="submit" class="btn-register">Register Now</button>
+                <button type="reset" class="btn btn-outline-secondary btn-block mt-2">Clear Form</button>
+                <p id="result" class="mt-3" role="status"></p>
+
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
+    <script>
+        var form = document.getElementById("studentForm");
+        var result = document.getElementById("result");
+
+        // Set the latest allowed date of birth to today
+        document.getElementById("dob").max =
+            new Date().toISOString().split("T")[0];
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var name = document.getElementById("studentName").value.trim();
+
+            result.textContent =
+                "Registration successful! Welcome, " + name + ".";
+
+            result.style.color = "green";
+
+            form.reset();
+        });
+
+        // Clear the message when the form is reset
+        form.addEventListener("reset", function () {
+            result.textContent = "";
+        });
+    </script>
+
+</body>
+
+</html>
