@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ABC College | Quality Education</title>
+
+    <style>
+        /* ===== BASIC SETTINGS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #173b57;
+            --secondary: #28658a;
+            --accent: #f2b84b;
+            --light: #f1f6fa;
+            --white: #ffffff;
+            --text: #334155;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section {
+            padding: 75px 0;
+            scroll-margin-top: 75px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-desc {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        /* ===== NAVBAR ===== */
+        header {
+            background: var(--primary);
+            color: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            min-height: 75px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .menu-btn {
+            display: none;
+            background: transparent;
+            color: white;
+            border: 1px solid #ffffff66;
+            padding: 7px 12px;
+            border-radius: 5px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 12px 23px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            filter: brightness(0.95);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== HERO / HOME ===== */
+        .hero {
+            background: linear-gradient(
+                120deg, #e9f2f8, #f7fafc
+            );
+            padding: 95px 0;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: #d9eaf5;
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 52px);
+            line-height: 1.2;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 17px;
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== COLLEGE FACTS ===== */
+        .facts {
+            background: var(--primary);
+            color: white;
+            padding: 28px 0;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .fact h3 {
+            color: var(--accent);
+            font-size: 25px;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-panel {
+            min-height: 260px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .about-panel .icon {
+            font-size: 75px;
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .about-content p {
+            margin-bottom: 15px;
+        }
+
+        /* ===== COURSES ===== */
+        .courses-section {
+            background: var(--light);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .course-card {
+            background: white;
+            border: 1px solid #e3eaf0;
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 22px #173b5718;
+        }
+
+        .course-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .course-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .course-card p {
+            margin-bottom: 18px;
+        }
+
+        .course-card a {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* ===== FACILITIES ===== */
+        .facility-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .facility {
+            text-align: center;
+            padding: 20px 12px;
+        }
+
+        .facility .icon {
+            font-size: 38px;
+        }
+
+        .facility h3 {
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        /* ===== ADMISSION FORM ===== */
+        .admission-section {
+            background: var(--light);
+        }
+
+        .form-box {
+            background: white;
+            max-width: 650px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #173b5710;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            font: inherit;
+            border: 1px solid #cbd5e1;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: 2px solid #8bbbd9;
+            border-color: var(--secondary);
+        }
+
+        .form-box .btn {
+            width: 100%;
+        }
+
+        .form-message {
+            margin-top: 15px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: var(--light);
+            padding: 25px 15px;
+            border-radius: 8px;
+        }
+
+        .contact-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .contact-card a {
+            color: var(--secondary);
+            overflow-wrap: anywhere;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #102c42;
+            color: #dbe5ed;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        .back-top {
+            display: inline-block;
+            color: var(--accent);
+            margin-top: 12px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 850px) {
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facility-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 14px 0;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 0;
+                padding-top: 10px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 11px 5px;
+                border-top: 1px solid #ffffff20;
+            }
+
+            .hero {
+                padding: 65px 0;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .facts-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .course-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+            .form-box {
+                padding: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <div class="container navbar">
+            <a class="logo" href="#home">
+                ABC <span>College</span>
+            </a>
+
+            <button
+                class="menu-btn"
+                id="menuBtn"
+                aria-label="Open navigation menu"
+                aria-controls="navLinks"
+                aria-expanded="false">
+                ☰
+            </button>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#courses">Courses</a>
+                <a href="#facilities">Facilities</a>
+                <a href="#admission">Admission</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HOME / HERO -->
+        <section class="hero" id="home">
+            <div class="container hero-content">
+
+                <span class="hero-label">
+                    ADMISSIONS OPEN — ENQUIRE TODAY
+                </span>
+
+                <h1>Build Your Future With Quality Education</h1>
+
+                <p>
+                    Welcome to ABC College. Discover your potential
+                    with experienced faculty, career-focused courses,
+                    and a supportive learning environment.
+                </p>
+
+                <div class="hero-buttons">
+                    <a class="btn" href="#admission">
+                        Apply for Admission
+                    </a>
+
+                    <a class="btn btn-primary" href="#courses">
+                        Explore Courses
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COLLEGE FACTS -->
+        <section class="facts" aria-label="College highlights">
+            <div class="container facts-grid">
+                <div class="fact">
+                    <h3>Quality</h3>
+                    <p>Student-focused Learning</p>
+                </div>
+
+                <div class="fact">
+                    <h3>Expert</h3>
+                    <p>Dedicated Faculty</p>
+                </div>
+
+                <div class="fact">
+                    <h3>Career</h3>
+                    <p>Skills for the Future</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="section" id="about">
+            <div class="container">
+
+                <h2 class="section-title">About Our College</h2>
+
+                <p class="section-desc">
+                    Helping students learn, grow, and prepare for
+                    opportunities in a changing world.
+                </p>
+
+                <div class="about-grid">
+
+                    <div class="about-panel">
+                        <div>
+                            <div class="icon">🎓</div>
+                            <h3>Learn Today, Lead Tomorrow</h3>
+                            <p>Knowledge • Skills • Opportunities</p>
+                        </div>
+                    </div>
+
+                    <div class="about-content">
+                        <h3>Education That Inspires Growth</h3>
+
+                        <p>
+                            ABC College is a sample college website
+                            designed to present courses, facilities,
+                            and student admission information.
+                        </p>
+
+                        <p>
+                            Our goal is to provide a welcoming learning
+                            environment where students can develop
+                            academic knowledge and practical skills.
+                        </p>
+
+                        <a class="btn btn-primary" href="#contact">
+                            Contact Us
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- COURSES -->
+        <section class="section courses-section" id="courses">
+            <div class="container">
+
+                <h2 class="section-title">Our Courses</h2>
+
+                <p class="section-desc">
+                    Explore programs to find a course that matches
+                    your interests and career goals.
+                </p>
+
+                <div class="course-grid">
+
+                    <article class="course-card">
+                        <div class="course-icon">💻</div>
+                        <h3>BCA</h3>
+                        <p>
+                            Learn programming, computer applications,
+                            and web development fundamentals.
+                        </p>
+                        <a href="#admission" data-course="BCA">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-icon">📊</div>
+                        <h3>BBA</h3>
+                        <p>
+                            Explore management, marketing, leadership,
+                            and business fundamentals.
+                        </p>
+                        <a href="#admission" data-course="BBA">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-icon">📈</div>
+                        <h3>B.Com</h3>
+                        <p>
+                            Study accounting, commerce, finance,
+                            and business operations.
+                        </p>
+                        <a href="#admission" data-course="B.Com">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-icon">🔬</div>
+                        <h3>B.Sc</h3>
+                        <p>
+                            Build a foundation in scientific
+                            concepts and analytical thinking.
+                        </p>
+                        <a href="#admission" data-course="B.Sc">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-icon">📚</div>
+                        <h3>BA</h3>
+                        <p>
+                            Explore humanities, communication,
+                            literature, and social sciences.
+                        </p>
+                        <a href="#admission" data-course="BA">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-icon">🎓</div>
+                        <h3>MCA</h3>
+                        <p>
+                            Explore advanced computing and software
+                            development concepts.
+                        </p>
+                        <a href="#admission" data-course="MCA">
+                            Enquire Now →
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FACILITIES -->
+        <section class="section" id="facilities">
+            <div class="container">
+
+                <h2 class="section-title">Our Facilities</h2>
+
+                <p class="section-desc">
+                    A supportive environment for academic and
+                    personal development.
+                </p>
+
+                <div class="facility-grid">
+
+                    <div class="facility">
+                        <div class="icon">📖</div>
+                        <h3>Library</h3>
+                        <p>Resources for learning and research.</p>
+                    </div>
+
+                    <div class="facility">
+                        <div class="icon">💻</div>
+                        <h3>Computer Lab</h3>
+                        <p>Practice and develop technical skills.</p>
+                    </div>
+
+                    <div class="facility">
+                        <div class="icon">🏅</div>
+                        <h3>Sports</h3>
+                        <p>Encourage teamwork and fitness.</p>
+                    </div>
+
+                    <div class="facility">
+                        <div class="icon">👩‍🏫</div>
+                        <h3>Faculty</h3>
+                        <p>Guidance for academic development.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMISSION / INQUIRY FORM -->
+        <section class="section admission-section" id="admission">
+            <div class="container">
+
+                <h2 class="section-title">Admission Enquiry</h2>
+
+                <p class="section-desc">
+                    Fill in your details to prepare an admission enquiry.
+                </p>
+
+                <div class="form-box">
+
+                    <form id="admissionForm">
+
+                        <div class="form-group">
+                            <label for="studentName">Full Name</label>
+                            <input
+                                type="text"
+                                id="studentName"
+                                name="studentName"
+                                placeholder="Enter your full name"
+                                minlength="2"
+                                maxlength="80"
+                                autocomplete="name"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentEmail">Email Address</label>
+                            <input
+                                type="email"
+                                id="studentEmail"
+                                name="studentEmail"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentPhone">Mobile Number</label>
+                            <input
+                                type="tel"
+                                id="studentPhone"
+                                name="studentPhone"
+                                placeholder="Enter your mobile number"
+                                pattern="[0-9+\-\s()]{7,20}"
+                                autocomplete="tel"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentCourse">Select Course</label>
+                            <select
+                                id="studentCourse"
+                                name="studentCourse"
+                                required>
+                                <option value="">Choose a course</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BBA">BBA</option>
+                                <option value="B.Com">B.Com</option>
+                                <option value="B.Sc">B.Sc</option>
+                                <option value="BA">BA</option>
+                                <option value="MCA">MCA</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentMessage">Message</label>
+                            <textarea
+                                id="studentMessage"
+                                name="studentMessage"
+                                rows="4"
+                                maxlength="1000"
+                                placeholder="Write your enquiry (optional)"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">
+                            Submit Enquiry
+                        </button>
+
+                        <p
+                            class="form-message"
+                            id="formMessage"
+                            role="status"
+                            aria-live="polite">
+                        </p>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section" id="contact">
+            <div class="container">
+
+                <h2 class="section-title">Contact Us</h2>
+
+                <p class="section-desc">
+                    Have questions? Contact our college office.
+                </p>
+
+                <div class="contact-grid">
+
+                    <div class="contact-card">
+                        <h3>📍 Address</h3>
+                        <p>College Road, Your City, India</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>✉️ Email</h3>
+                        <p>
+                            <a href="mailto:info@example.com">
+                                info@example.com
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="contact-card">
+                        <h3>📞 Phone</h3>
+                        <p>
+                            <a href="tel:+910000000000">
+                                +91 00000 00000
+                            </a>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <h3>ABC College</h3>
+
+            <p>
+                Learn Today, Lead Tomorrow.
+            </p>
+
+            <p>
+                &copy; <span id="currentYear"></span>
+                ABC College. All rights reserved.
+            </p>
+
+            <a href="#home" class="back-top">
+                Back to Top ↑
+            </a>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Mobile navigation
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        function closeMenu() {
+            navLinks.classList.remove("active");
+            menuBtn.setAttribute("aria-expanded", "false");
+            menuBtn.setAttribute("aria-label", "Open navigation menu");
+            menuBtn.textContent = "☰";
+        }
+
+        menuBtn.addEventListener("click", function () {
+            const isOpen = navLinks.classList.toggle("active");
+
+            menuBtn.setAttribute("aria-expanded", String(isOpen));
+            menuBtn.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation menu" : "Open navigation menu"
+            );
+
+            menuBtn.textContent = isOpen ? "✕" : "☰";
+        });
+
+        // Close mobile menu after selecting a section
+        navLinks.querySelectorAll("a").forEach(function (link) {
+            link.addEventListener("click", closeMenu);
+        });
+
+        // Close mobile menu if screen becomes wider
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 650) {
+                closeMenu();
+            }
+        });
+
+        // Automatically update copyright year
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
+
+        // Select a course from its Enquire Now link
+        document.querySelectorAll("[data-course]").forEach(function (link) {
+            link.addEventListener("click", function () {
+                document.getElementById("studentCourse").value =
+                    link.dataset.course;
+            });
+        });
+
+        // Admission form validation and confirmation
+        const form = document.getElementById("admissionForm");
+        const message = document.getElementById("formMessage");
+
+        form.addEventListener("input", function () {
+            message.textContent = "";
+        });
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            const name =
+                document.getElementById("studentName").value.trim();
+
+            const course =
+                document.getElementById("studentCourse").value;
+
+            message.textContent =
+                "Thank you, " + name +
+                "! Your " + course +
+                " enquiry has been prepared successfully.";
+
+            message.style.color = "#176b39";
+
+            // This demo does not send or store the form data.
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>
