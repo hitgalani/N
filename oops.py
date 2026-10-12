@@ -1,35 +1,7 @@
-"""
-BEGINNER PYTHON PRACTICALS — SEPARATE VERSIONS IN ONE FILE
-
-How to run:
-  python beginner_practicals.py 1    # Stack
-  python beginner_practicals.py 2    # Queue
-  ...
-  python beginner_practicals.py 11   # Binary Search Tree
-
-Run only one version at a time. Each section below is a complete,
-independent program and follows the supplied material's single-character
-expression examples and beginner-level data-structure operations.
-
-Versions:
-  1 Stack
-  2 Queue
-  3 Infix to Postfix
-  4 Postfix to Infix
-  5 Infix to Prefix
-  6 Prefix to Infix
-  7 Deque
-  8 Bubble Sort
-  9 Selection Sort
- 10 Quick Sort
- 11 Binary Search Tree (inorder traversal)
-"""
-
-
 # ========================================================================
 # VERSION 1 — STACK
 # ========================================================================
-VERSION_1_CODE = r"""def main():
+def main():
     stack = []
 
     while True:
@@ -61,13 +33,103 @@ VERSION_1_CODE = r"""def main():
         else:
             print("Invalid choice.")
 
-if __name__ == "__main__":
-    main()"""
+# ===========================simple stack implementation using class===========================
+
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def push(self, item):
+        self.items.append(item)
+        print(self.items)
+
+    def pop(self):
+        if self.is_empty():
+            return "Stack is empty"
+        return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            return "Stack is empty"
+        return self.items[-1]
+
+    def size(self):
+        return len(self.items)
+
+
+o = Stack()
+
+o.push(1)
+o.push(2)
+o.push(3)
+o.push(4)
+
+print(o.pop())
+print(o.peek())
+print(o.size())
+
+# ===========================simple stack implementation using class and while loop and input===========================
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def push(self, item):
+        self.items.append(item)
+        print(self.items)
+
+    def pop(self):
+        if self.is_empty():
+            return "Stack is empty"
+        return self.items.pop()
+
+    def peek(self):
+        if self.is_empty():
+            return "Stack is empty"
+        return self.items[-1]
+
+    def size(self):
+        return len(self.items)
+
+o = Stack()
+while True:
+    print("\n--- STACK MENU ---")
+    print("1. Push")
+    print("2. Pop")
+    print("3. Peek")
+    print("4. Size")
+    print("5. Exit")
+
+    try:
+        choice = int(input("Enter your choice: "))
+    except ValueError:
+        print("Please enter a number.")
+        continue
+
+    if choice == 1:
+        item = input("Enter element: ")
+        o.push(item)
+    elif choice == 2:
+        print("Deleted element:", o.pop())
+    elif choice == 3:
+        print("Top element:", o.peek())
+    elif choice == 4:
+        print("Stack size:", o.size())
+    elif choice == 5:
+        break
+    else:
+        print("Invalid choice.")
+
 
 # ========================================================================
 # VERSION 2 — QUEUE
 # ========================================================================
-VERSION_2_CODE = r"""from collections import deque
+from collections import deque
 
 def main():
     queue = deque()
@@ -101,376 +163,209 @@ def main():
         else:
             print("Invalid choice.")
 
-if __name__ == "__main__":
-    main()"""
+# ===========================queue implementation using class===========================
+class Queue:
+    def __init__(self):
+        self.items = deque()
 
-# ========================================================================
-# VERSION 3 — INFIX TO POSTFIX
-# ========================================================================
-VERSION_3_CODE = r"""OPERATORS = "+-*/^"
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def enqueue(self, item):
+        self.items.append(item)
+        print(self.items)
+
+    def dequeue(self):
+        if self.is_empty():
+            return "Queue is empty"
+        return self.items.popleft()
+
+    def peek(self):
+        if self.is_empty():
+            return "Queue is empty"
+        return self.items[0]
+
+    def size(self):
+        return len(self.items)
+o = Queue()
+o.enqueue(1)
+o.enqueue(2)
+o.enqueue(3)
+o.enqueue(4)
+
+print(o.dequeue())
+print(o.peek())
+print(o.size())
+
+# ===========================simple stack implementation using class and while loop and input===========================
+class Queue:
+    def __init__(self):
+        self.items = deque()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def enqueue(self, item):
+        self.items.append(item)
+        print(self.items)
+
+    def dequeue(self):
+        if self.is_empty():
+            return "Queue is empty"
+        return self.items.popleft()
+
+    def peek(self):
+        if self.is_empty():
+            return "Queue is empty"
+        return self.items[0]
+
+    def size(self):
+        return len(self.items)
+o = Queue()
+while True:
+    print("\n--- QUEUE MENU ---")
+    print("1. Enqueue")
+    print("2. Dequeue")
+    print("3. Peek")
+    print("4. Size")
+    print("5. Exit")
+
+    try:
+        choice = int(input("Enter your choice: "))
+    except ValueError:
+        print("Please enter a number.")
+        continue
+
+    if choice == 1:
+        item = input("Enter element: ")
+        o.enqueue(item)
+    elif choice == 2:
+        print("Deleted element:", o.dequeue())
+    elif choice == 3:
+        print("Front element:", o.peek())
+    elif choice == 4:
+        print("Queue size:", o.size())
+    elif choice == 5:
+        break
+    else:
+        print("Invalid choice.")
+
+# ===========================Infix to postfix conversion===========================
+
+# Infix to Postfix Conversion
 
 def precedence(operator):
-    if operator in ("+", "-"):
-        return 1
-    if operator in ("*", "/"):
-        return 2
-    if operator == "^":
+    if operator == '^':
         return 3
-    return 0
+    elif operator == '*' or operator == '/':
+        return 2
+    elif operator == '+' or operator == '-':
+        return 1
+    else:
+        return 0
+
 
 def infix_to_postfix(expression):
     stack = []
-    output = []
-
-    for char in expression.replace(" ", ""):
-        if char.isalnum():
-            output.append(char)
-        elif char == "(":
-            stack.append(char)
-        elif char == ")":
-            while stack and stack[-1] != "(":
-                output.append(stack.pop())
-            if not stack:
-                return "Invalid expression"
-            stack.pop()
-        elif char in OPERATORS:
-            while (stack and stack[-1] != "(" and
-                   (precedence(stack[-1]) > precedence(char) or
-                    (precedence(stack[-1]) == precedence(char) and char != "^"))):
-                output.append(stack.pop())
-            stack.append(char)
-        else:
-            return "Invalid character"
-
-    if "(" in stack:
-        return "Invalid expression"
-
-    while stack:
-        output.append(stack.pop())
-
-    return "".join(output)
-
-def main():
-    expression = input("Enter infix expression (e.g. A+B*C): ")
-    print("Postfix expression:", infix_to_postfix(expression))
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 4 — POSTFIX TO INFIX
-# ========================================================================
-VERSION_4_CODE = r"""OPERATORS = "+-*/^"
-
-def postfix_to_infix(expression):
-    stack = []
-
-    for char in expression.replace(" ", ""):
-        if char.isalnum():
-            stack.append(char)
-        elif char in OPERATORS:
-            if len(stack) < 2:
-                return "Invalid postfix expression"
-            right = stack.pop()
-            left = stack.pop()
-            stack.append("(" + left + char + right + ")")
-        else:
-            return "Invalid character"
-
-    if len(stack) != 1:
-        return "Invalid postfix expression"
-
-    return stack.pop()
-
-def main():
-    expression = input("Enter postfix expression (e.g. AB+C*): ")
-    print("Infix expression:", postfix_to_infix(expression))
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 5 — INFIX TO PREFIX
-# ========================================================================
-VERSION_5_CODE = r"""OPERATORS = "+-*/^"
-
-def precedence(operator):
-    if operator in ("+", "-"):
-        return 1
-    if operator in ("*", "/"):
-        return 2
-    if operator == "^":
-        return 3
-    return 0
-
-def infix_to_prefix(expression):
-    expression = expression.replace(" ", "")
-    expression = expression[::-1].replace("(", "#").replace(")", "(").replace("#", ")")
-    stack = []
-    output = []
+    postfix = []
 
     for char in expression:
+        if char == ' ':
+            continue
+
+        # If operand, add it to postfix
         if char.isalnum():
-            output.append(char)
-        elif char == "(":
+            postfix.append(char)
+
+        # If opening bracket, push onto stack
+        elif char == '(':
             stack.append(char)
-        elif char == ")":
-            while stack and stack[-1] != "(":
-                output.append(stack.pop())
-            if not stack:
-                return "Invalid expression"
-            stack.pop()
-        elif char in OPERATORS:
-            while (stack and stack[-1] != "(" and
-                   (precedence(stack[-1]) > precedence(char) or
-                    (precedence(stack[-1]) == precedence(char) and char == "^"))):
-                output.append(stack.pop())
-            stack.append(char)
+
+        # If closing bracket, pop until opening bracket
+        elif char == ')':
+            while stack and stack[-1] != '(':
+                postfix.append(stack.pop())
+
+            if stack:
+                stack.pop()
+
+        # If operator, handle precedence
         else:
-            return "Invalid character"
+            while stack and stack[-1] != '(' and (
+                precedence(stack[-1]) > precedence(char)
+                or (
+                    precedence(stack[-1]) == precedence(char)
+                    and char != '^'
+                )
+            ):
+                postfix.append(stack.pop())
 
-    if "(" in stack:
-        return "Invalid expression"
+            stack.append(char)
 
+    # Pop remaining operators
     while stack:
-        output.append(stack.pop())
+        if stack[-1] == '(':
+            raise ValueError("Invalid expression: unmatched bracket")
+        postfix.append(stack.pop())
 
-    return "".join(output[::-1])
+    return ' '.join(postfix)
 
-def main():
-    expression = input("Enter infix expression (e.g. A+B*C): ")
-    print("Prefix expression:", infix_to_prefix(expression))
 
-if __name__ == "__main__":
-    main()"""
+# Main program
+infix_expression = "a+b*(c-d)/e"
 
-# ========================================================================
-# VERSION 6 — PREFIX TO INFIX
-# ========================================================================
-VERSION_6_CODE = r"""OPERATORS = "+-*/^"
+postfix_expression = infix_to_postfix(infix_expression)
 
-def prefix_to_infix(expression):
+print("Infix Expression:", infix_expression)
+print("Postfix Expression:", postfix_expression)
+
+
+# ===========================Postfix to Infix Conversion===========================
+
+def is_operand(char):
+    return char.isalnum()
+
+
+def postfix_to_infix(postfix_expression):
     stack = []
 
-    for char in expression.replace(" ", "")[::-1]:
-        if char.isalnum():
+    for char in postfix_expression:
+        if char == ' ':
+            continue
+
+        # If operand, push onto stack
+        if is_operand(char):
             stack.append(char)
-        elif char in OPERATORS:
+
+        # If operator, pop two operands
+        elif char in '+-*/^':
             if len(stack) < 2:
-                return "Invalid prefix expression"
-            left = stack.pop()
-            right = stack.pop()
-            stack.append("(" + left + char + right + ")")
+                raise ValueError("Invalid postfix expression")
+
+            operand2 = stack.pop()
+            operand1 = stack.pop()
+
+            # Create infix expression
+            new_expression = (
+                "(" + operand1 + " " + char + " " + operand2 + ")"
+            )
+
+            stack.append(new_expression)
+
         else:
-            return "Invalid character"
+            raise ValueError("Invalid character in expression")
 
     if len(stack) != 1:
-        return "Invalid prefix expression"
+        raise ValueError("Invalid postfix expression")
 
     return stack.pop()
 
-def main():
-    expression = input("Enter prefix expression (e.g. +A*BC): ")
-    print("Infix expression:", prefix_to_infix(expression))
 
-if __name__ == "__main__":
-    main()"""
+# Main program
+postfix_expression = "abc+*d/"
 
-# ========================================================================
-# VERSION 7 — DEQUE
-# ========================================================================
-VERSION_7_CODE = r"""from collections import deque
+infix_expression = postfix_to_infix(postfix_expression)
 
-def main():
-    items = deque()
+print("Postfix Expression:", postfix_expression)
+print("Infix Expression:", infix_expression)
 
-    while True:
-        print("\n--- DEQUE MENU ---")
-        print("1. Insert at front")
-        print("2. Insert at rear")
-        print("3. Delete from front")
-        print("4. Delete from rear")
-        print("5. Display")
-        print("6. Exit")
-
-        try:
-            choice = int(input("Enter your choice: "))
-        except ValueError:
-            print("Please enter a number.")
-            continue
-
-        if choice == 1:
-            item = input("Enter element: ")
-            items.appendleft(item)
-            print("Inserted:", item)
-        elif choice == 2:
-            item = input("Enter element: ")
-            items.append(item)
-            print("Inserted:", item)
-        elif choice == 3:
-            print("Deleted:", items.popleft() if items else "Deque is empty")
-        elif choice == 4:
-            print("Deleted:", items.pop() if items else "Deque is empty")
-        elif choice == 5:
-            print("Deque elements:", list(items))
-        elif choice == 6:
-            break
-        else:
-            print("Invalid choice.")
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 8 — BUBBLE SORT
-# ========================================================================
-VERSION_8_CODE = r"""def bubble_sort(numbers):
-    numbers = numbers.copy()
-
-    for i in range(len(numbers) - 1):
-        swapped = False
-        for j in range(len(numbers) - 1 - i):
-            if numbers[j] > numbers[j + 1]:
-                numbers[j], numbers[j + 1] = numbers[j + 1], numbers[j]
-                swapped = True
-        if not swapped:
-            break
-
-    return numbers
-
-def main():
-    try:
-        numbers = [int(value) for value in input("Enter integers separated by spaces: ").split()]
-    except ValueError:
-        print("Please enter integers only.")
-        return
-    print("Sorted list:", bubble_sort(numbers))
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 9 — SELECTION SORT
-# ========================================================================
-VERSION_9_CODE = r"""def selection_sort(numbers):
-    numbers = numbers.copy()
-
-    for i in range(len(numbers) - 1):
-        min_index = i
-        for j in range(i + 1, len(numbers)):
-            if numbers[j] < numbers[min_index]:
-                min_index = j
-        numbers[i], numbers[min_index] = numbers[min_index], numbers[i]
-
-    return numbers
-
-def main():
-    try:
-        numbers = [int(value) for value in input("Enter integers separated by spaces: ").split()]
-    except ValueError:
-        print("Please enter integers only.")
-        return
-    print("Sorted list:", selection_sort(numbers))
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 10 — QUICK SORT
-# ========================================================================
-VERSION_10_CODE = r"""def quick_sort(numbers):
-    if len(numbers) <= 1:
-        return numbers.copy()
-
-    pivot = numbers[len(numbers) // 2]
-    smaller = [value for value in numbers if value < pivot]
-    equal = [value for value in numbers if value == pivot]
-    larger = [value for value in numbers if value > pivot]
-
-    return quick_sort(smaller) + equal + quick_sort(larger)
-
-def main():
-    try:
-        numbers = [int(value) for value in input("Enter integers separated by spaces: ").split()]
-    except ValueError:
-        print("Please enter integers only.")
-        return
-    print("Sorted list:", quick_sort(numbers))
-
-if __name__ == "__main__":
-    main()"""
-
-# ========================================================================
-# VERSION 11 — BINARY SEARCH TREE (INORDER)
-# ========================================================================
-VERSION_11_CODE = r"""class Node:
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
-
-def insert(root, data):
-    if root is None:
-        return Node(data)
-    if data < root.data:
-        root.left = insert(root.left, data)
-    elif data > root.data:
-        root.right = insert(root.right, data)
-    return root
-
-def inorder(root):
-    if root is not None:
-        inorder(root.left)
-        print(root.data, end=" ")
-        inorder(root.right)
-
-def main():
-    try:
-        numbers = [int(value) for value in input("Enter BST values separated by spaces: ").split()]
-    except ValueError:
-        print("Please enter integers only.")
-        return
-
-    root = None
-    for number in numbers:
-        root = insert(root, number)
-
-    print("BST inorder traversal (sorted order):")
-    inorder(root)
-    print()
-
-if __name__ == "__main__":
-    main()"""
-
-
-def main():
-    import sys
-
-    versions = {
-        "1": ("Stack", VERSION_1_CODE),
-        "2": ("Queue", VERSION_2_CODE),
-        "3": ("Infix to Postfix", VERSION_3_CODE),
-        "4": ("Postfix to Infix", VERSION_4_CODE),
-        "5": ("Infix to Prefix", VERSION_5_CODE),
-        "6": ("Prefix to Infix", VERSION_6_CODE),
-        "7": ("Deque", VERSION_7_CODE),
-        "8": ("Bubble Sort", VERSION_8_CODE),
-        "9": ("Selection Sort", VERSION_9_CODE),
-        "10": ("Quick Sort", VERSION_10_CODE),
-        "11": ("Binary Search Tree", VERSION_11_CODE),
-    }
-
-    if len(sys.argv) != 2 or sys.argv[1] not in versions:
-        print("Choose one version by number:")
-        for number, (name, _) in versions.items():
-            print(f"{number}. {name}")
-        print("\nExample: python beginner_practicals.py 1")
-        return
-
-    name, code = versions[sys.argv[1]]
-    print(f"Running Version {sys.argv[1]}: {name}")
-    namespace = {"__name__": "__main__"}
-    exec(compile(code, f"<Version {sys.argv[1]}: {name}>", "exec"), namespace)
-
-if __name__ == "__main__":
-    main()
